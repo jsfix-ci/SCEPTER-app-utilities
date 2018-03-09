@@ -1,14 +1,16 @@
 {
   "name": "@source4society/scepter-app-utilities",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Universal application-level utilities following principles from the SCEPTER framework and react-boilerplate. Intended to be used to help bootstrap web and mobile user interfaces",
-  "main": "reducer.js",
+  "main": "lib/reducer.js",
   "repository": "git@github.com:source4societyorg/SCEPTER-app-utilities.git",
   "author": "Source 4 Society <accounts@source4society.org>",
   "license": "AGPL-3.0",
   "private": false,
   "scripts": {
-    "test": "eslint ./**/*.js --ignore-path .gitignore && jest --coverage"
+    "test": "eslint ./**/*.js --ignore-path .gitignore && jest --coverage",
+    "build": "babel src/reducer.js -d lib",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "@source4society/scepter-utility-lib": "^1.1.0",
@@ -17,8 +19,14 @@
     "lodash": "^4.17.5",
     "react": "15.6.1",
     "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2",
     "redux-immutable": "^4.0.0",
-    "babel-cli": "6.24.1",
+    "redux-saga": "^0.16.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.2.3",
+    "babel-jest": "^22.4.1",
+    "babel-cli": "^6.26.0",
     "babel-core": "6.24.1",
     "babel-eslint": "7.2.3",
     "babel-loader": "7.1.0",
@@ -32,11 +40,7 @@
     "babel-plugin-transform-react-remove-prop-types": "0.4.5",
     "babel-preset-env": "1.5.1",
     "babel-preset-react": "6.24.1",
-    "babel-preset-stage-0": "6.24.1"
-  },
-  "devDependencies": {
-    "babel-eslint": "7.2.3",
-    "babel-jest": "^22.4.1",
+    "babel-preset-stage-0": "6.24.1",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "15.0.1",
     "eslint-config-airbnb-base": "11.2.0",
@@ -45,6 +49,5 @@
     "eslint-plugin-jsx-a11y": "5.0.3",
     "eslint-plugin-react": "^7.6.1",
     "jest-cli": "^21.0.0"
-    
   }
 }

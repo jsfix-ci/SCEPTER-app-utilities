@@ -19,9 +19,9 @@ Works best with [SCEPTER-webui](https://www.github.com/source4societyorg/SCEPTER
 
 # Installation
 
-  npm install @source4society/scepter-app-utilities
+    npm install @source4society/scepter-app-utilities
 
 or
 
-  yarn install @source4society/scepter-app-utilities
+    yarn install @source4society/scepter-app-utilities
 
