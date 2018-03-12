@@ -1,5 +1,5 @@
 # build
-/lib
+/lib/index.js
 # Logs
 logs
 *.log
