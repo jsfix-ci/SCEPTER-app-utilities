@@ -1,16 +1,56 @@
 /**
- * Create the store with dynamic reducers
+ * Combine all reducers in this file and export the combined reducers.
  */
+
+import { combineReducers } from 'redux-immutable';
+import { fromJS } from 'immutable';
+import { routerMiddleware, LOCATION_CHANGE } from 'react-router-redux';
 import { valueOrDefault } from '@source4society/scepter-utility-lib';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { fromJS } from 'immutable';
-import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
-import createReducer from './reducer';
+
+/*
+ * routeReducer
+ *
+ * The reducer merges route location changes into our immutable state.
+ * The change is necessitated by moving to react-router-redux@4
+ *
+ */
+
+// Initial routing state
+export const routeInitialState = fromJS({
+  location: null,
+});
+
+/**
+ * Merge route into the global application state
+ */
+export function routeReducer(injectedState, action) {
+  const state = valueOrDefault(injectedState, routeInitialState);
+  switch (action.type) {
+    /* istanbul ignore next */
+    case LOCATION_CHANGE:
+      return state.merge({
+        location: action.payload,
+      });
+    default:
+      return state;
+  }
+}
+
+/**
+ * Creates the main reducer with the dynamically injected ones
+ */
+export function createReducer(injectedReducers) {
+  return combineReducers({
+    route: routeReducer,
+    ...injectedReducers,
+  });
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
-export default function configureStore(injectedInitialState, history) {
+export function configureStore(injectedInitialState, history) {
   const initialState = valueOrDefault(injectedInitialState, {});
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
