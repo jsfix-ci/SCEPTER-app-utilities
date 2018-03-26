@@ -83,7 +83,7 @@ export const enableHotReloading = (store) => {
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {
-    module.hot.accept('./reducer', () => {
+    module.hot.accept('@source4society/scepter-app-utilities', () => {
       store.replaceReducer(createReducer(store.injectedReducers));
     });
   }
