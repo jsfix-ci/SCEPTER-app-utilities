@@ -2,3 +2,4 @@
 /tests
 .babelrc
 .eslintrc.json
+.travis.yml
